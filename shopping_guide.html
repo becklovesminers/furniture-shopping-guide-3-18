@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 419 — Furniture Shopping</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F9F6F1;
+    --warm: #EDE8DF;
+    --ink: #1C1A17;
+    --muted: #7A7570;
+    --amber: #C97B2E;
+    --amber-light: #F5EAD8;
+    --black: #111;
+    --border: #DDD8D0;
+    --red: #B84040;
+    --red-light: #FBF0F0;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  header {
+    background: var(--ink);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .nav a {
+    padding: 1rem 1.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav a:hover { color: var(--ink); border-color: var(--ink); }
+
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+
+  .section-header span {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  .card.our-pick {
+    border: 2px solid var(--amber);
+  }
+
+  .card.alexa-warning {
+    border: 2px solid var(--red);
+  }
+
+  .card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--warm);
+    display: block;
+  }
+
+  .card-img-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+
+  .badge-bar {
+    padding: 0.5rem 1rem 0;
+    min-height: 1.8rem;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .badge-pick { background: var(--amber-light); color: var(--amber); }
+  .badge-alexa { background: var(--red-light); color: var(--red); }
+
+  .card-body {
+    padding: 0.75rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+
+  .card-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .card-color {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .card-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 0.25rem;
+  }
+
+  .alexa-note {
+    background: var(--red-light);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.78rem;
+    color: var(--red);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-top: 0.25rem;
+  }
+
+  .specs {
+    list-style: none;
+    margin-top: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .specs li {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .specs li::before {
+    content: "·";
+    color: var(--border);
+  }
+
+  .card-footer {
+    padding: 0 1rem 1rem;
+    margin-top: auto;
+  }
+
+  .btn {
+    display: block;
+    text-align: center;
+    padding: 0.65rem 1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: white;
+  }
+
+  .btn-primary:hover { background: #333; }
+
+  .btn-alexa {
+    background: var(--red);
+    color: white;
+  }
+
+  .btn-alexa:hover { background: #9a3535; }
+
+  footer {
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card-price { font-size: 1.3rem; }
+  }
+
+  @media (max-width: 400px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Unit 419 — Furniture Picks</h1>
+  <p>Shopping guide · Counterbalance Apartments</p>
+</header>
+
+<nav class="nav">
+  <a href="#tv-stands">TV Stands</a>
+  <a href="#armoires">Armoires</a>
+  <a href="#desks">Corner Desks</a>
+</nav>
+
+<!-- TV STANDS -->
+<section id="tv-stands">
+  <div class="section-header">
+    <h2>TV Stands with Fireplace</h2>
+    <span>East wall · matte black</span>
+  </div>
+  <div class="grid">
+
+    <div class="card our-pick">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/71PoqmNcO0L._AC_SL1500_.jpg" alt="BELLEZE Avenue 70" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🔥</div>
+      <div class="badge-bar"><span class="badge badge-pick">our pick</span></div>
+      <div class="card-body">
+        <p class="card-name">BELLEZE Avenue 70"</p>
+        <p class="card-color">Matte black</p>
+        <p class="card-price">~$230</p>
+        <ul class="specs">
+          <li>5,000 BTU fireplace</li>
+          <li>16-color LED strip</li>
+          <li>4 AC outlets + USB ports</li>
+          <li>Remote + app control</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0C4GKTBMZ" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/71pNSNBJpvL._AC_SL1500_.jpg" alt="AHB 70" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🔥</div>
+      <div class="badge-bar"></div>
+      <div class="card-body">
+        <p class="card-name">AHB 70" LED Fireplace</p>
+        <p class="card-color">Matte black</p>
+        <p class="card-price">~$200</p>
+        <ul class="specs">
+          <li>5,100 BTU fireplace</li>
+          <li>12 flame color modes</li>
+          <li>App control via phone</li>
+          <li>Remote included</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0C7V9974F" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/81AJiOf6pML._AC_SL1500_.jpg" alt="EROMMY 70" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🔥</div>
+      <div class="badge-bar"></div>
+      <div class="card-body">
+        <p class="card-name">EROMMY 70"</p>
+        <p class="card-color">Matte black</p>
+        <p class="card-price">~$180</p>
+        <ul class="specs">
+          <li>5,120 BTU fireplace</li>
+          <li>12 flame + 16 LED modes</li>
+          <li>Open shelves design</li>
+          <li>Remote included</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0CCJFG9QD" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card alexa-warning">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/71pDaVHhUoL._AC_SL1500_.jpg" alt="Modern Ember Channing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🏆</div>
+      <div class="badge-bar"><span class="badge badge-alexa">Native Alexa + WiFi</span></div>
+      <div class="card-body">
+        <p class="card-name">Modern Ember Channing 80"</p>
+        <p class="card-color">Matte black</p>
+        <p class="card-price">~$1,520</p>
+        <p class="alexa-note">✓ "Alexa, turn on the fireplace" actually works on this one</p>
+        <ul class="specs">
+          <li>26" smart firebox insert</li>
+          <li>10 flame colors, 4 speeds</li>
+          <li>Smoked glass side cabinets</li>
+          <li>Fits TVs up to 90"</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-alexa" href="https://www.amazon.com/dp/B0DG41KJ7Q" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARMOIRES -->
+<section id="armoires" style="background: white; max-width: 100%; padding: 0;">
+<div style="max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem;">
+  <div class="section-header">
+    <h2>Armoires</h2>
+    <span>East wall · north end · honey/light oak</span>
+  </div>
+  <div class="grid">
+
+    <div class="card our-pick">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/61cC4KMIALL._AC_SL1500_.jpg" alt="SICOTAS Light Oak" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🪵</div>
+      <div class="badge-bar"><span class="badge badge-pick">our pick</span></div>
+      <div class="card-body">
+        <p class="card-name">SICOTAS 71" Rattan — Light Oak</p>
+        <p class="card-color">Light / honey oak</p>
+        <p class="card-price">~$180</p>
+        <ul class="specs">
+          <li>40"W — fits east wall</li>
+          <li>Rattan doors, gold handles</li>
+          <li>Hanging rod + 2 drawers</li>
+          <li>Matches kitchen cabinets</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0FF51WN56" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/61cC4KMIALL._AC_SL1500_.jpg" alt="SICOTAS Oak" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🪵</div>
+      <div class="badge-bar"></div>
+      <div class="card-body">
+        <p class="card-name">SICOTAS 71" Rattan — Oak</p>
+        <p class="card-color">Medium oak</p>
+        <p class="card-price">~$170</p>
+        <ul class="specs">
+          <li>Same build, deeper oak tone</li>
+          <li>Rattan doors, gold handles</li>
+          <li>Hanging rod + 2 drawers</li>
+          <li>Budget option, same brand</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0DWXBL7FC" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/61RCEt8XNKL._AC_SL1500_.jpg" alt="GarveeHome Walnut" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🪵</div>
+      <div class="badge-bar"></div>
+      <div class="card-body">
+        <p class="card-name">GarveeHome 72" — Walnut</p>
+        <p class="card-color">Walnut brown</p>
+        <p class="card-price">~$160</p>
+        <ul class="specs">
+          <li>31.5"W, modular build</li>
+          <li>18 adjustable shelves</li>
+          <li>2 drawers included</li>
+          <li>Note: darker than our scheme</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0GDY1CKDH" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- CORNER DESKS -->
+<section id="desks">
+  <div class="section-header">
+    <h2>Corner Desks</h2>
+    <span>East wall · kitchen nook · desk #3</span>
+  </div>
+  <div class="grid">
+
+    <div class="card our-pick">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/71QhcnuTWHL._AC_SL1500_.jpg" alt="TIQLAB desk" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🖥️</div>
+      <div class="badge-bar"><span class="badge badge-pick">our pick</span></div>
+      <div class="card-body">
+        <p class="card-name">TIQLAB 40" L-Shaped — Beige/Oak</p>
+        <p class="card-color">Natural oak / beige</p>
+        <p class="card-price">~$100</p>
+        <ul class="specs">
+          <li>2 AC + USB-A + USB-C</li>
+          <li>Reversible configuration</li>
+          <li>FSC certified wood</li>
+          <li>Fits kitchen nook perfectly</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/dp/B0CHRN21M9" target="_blank">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/71B2FPxl2TL._AC_SL1500_.jpg" alt="Lufeiya desk" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🖥️</div>
+      <div class="badge-bar"></div>
+      <div class="card-body">
+        <p class="card-name">Lufeiya 40" L-Shaped — Rustic Brown</p>
+        <p class="card-color">Rustic brown</p>
+        <p class="card-price">~$90</p>
+        <ul class="specs">
+          <li>Built-in charging station</li>
+          <li>Reversible shelves</li>
+          <li>Compact 40" footprint</li>
+          <li>Note: darker wood tone</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/s?k=Lufeiya+40+inch+L+shaped+desk+power+outlet+rustic+brown" target="_blank">Search on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="https://m.media-amazon.com/images/I/81i2gzStBQL._AC_SL1500_.jpg" alt="Rolanstar desk" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="card-img-placeholder" style="display:none">🖥️</div>
+      <div class="badge-bar"></div>
+      <div class="card-body">
+        <p class="card-name">Rolanstar 44.5" Corner — Rustic Brown</p>
+        <p class="card-color">Rustic brown</p>
+        <p class="card-price">~$120</p>
+        <ul class="specs">
+          <li>Power outlets + LED lights</li>
+          <li>Keyboard tray + monitor stand</li>
+          <li>Triangle corner shape</li>
+          <li>Note: darker wood tone</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary" href="https://www.amazon.com/s?k=Rolanstar+Corner+Desk+44.5+Rustic+Brown+LED+power+outlet" target="_blank">Search on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Unit 419 · Counterbalance Apartments, Seattle · All prices approximate, check Amazon for current listings
+</footer>
+
+</body>
+</html>
