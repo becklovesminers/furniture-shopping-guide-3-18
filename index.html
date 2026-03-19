@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa de Ween</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F9F6F1;--warm:#EDE8DF;--ink:#1C1A17;--muted:#7A7570;
+  --amber:#C97B2E;--amber-bg:#F5EAD8;--border:#DDD8D0;
+  --red:#A83232;--red-bg:#FBF0F0;--white:#fff;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;line-height:1.5}
+header{background:var(--ink);color:white;padding:3rem 2rem 2.5rem;text-align:center}
+header h1{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:400;margin-bottom:.4rem}
+header p{font-size:.82rem;color:rgba(255,255,255,.45);letter-spacing:.1em;text-transform:uppercase}
+nav{background:white;border-bottom:1px solid var(--border);display:flex;justify-content:center;overflow-x:auto;position:sticky;top:0;z-index:100}
+nav a{padding:.9rem 1.4rem;font-size:.78rem;font-weight:500;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+nav a:hover{color:var(--ink);border-color:var(--ink)}
+.section{max-width:1080px;margin:0 auto;padding:3rem 1.5rem}
+.alt{background:white}
+.alt .section{max-width:1080px;margin:0 auto;padding:3rem 1.5rem}
+.section-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.75rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-head h2{font-family:'DM Serif Display',serif;font-size:1.7rem;font-weight:400}
+.section-head span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.subsection{margin-bottom:2.5rem}
+.subsection-label{font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px dashed var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.25rem}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}
+.card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.07)}
+.card.pick{border:2px solid var(--amber)}
+.card.alexa{border:2px solid var(--red)}
+.img-wrap{background:var(--warm);aspect-ratio:1;overflow:hidden}
+.img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.card:hover .img-wrap img{transform:scale(1.03)}
+.badge-row{padding:.6rem 1rem 0;min-height:2rem}
+.badge{display:inline-block;font-size:.65rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.b-pick{background:var(--amber-bg);color:var(--amber)}
+.b-alexa{background:var(--red-bg);color:var(--red)}
+.card-body{padding:.5rem 1rem .75rem;flex:1;display:flex;flex-direction:column;gap:.35rem}
+.card-name{font-size:.92rem;font-weight:500;line-height:1.35}
+.card-sub{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.card-price{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;margin-top:.1rem}
+.alexa-note{margin-top:.25rem;background:var(--red-bg);border-radius:5px;padding:.45rem .7rem;font-size:.76rem;color:var(--red);font-weight:500;line-height:1.4}
+.specs{list-style:none;margin-top:.2rem;display:flex;flex-direction:column;gap:.15rem}
+.specs li{font-size:.78rem;color:var(--muted);padding-left:.9rem;position:relative}
+.specs li::before{content:"·";position:absolute;left:.2rem;color:var(--border)}
+.card-foot{padding:0 1rem 1rem;margin-top:auto}
+.btn{display:block;text-align:center;padding:.6rem 1rem;border-radius:7px;font-size:.8rem;font-weight:500;text-decoration:none;transition:background .15s}
+.btn-dark{background:var(--ink);color:white}
+.btn-dark:hover{background:#333}
+.btn-red{background:var(--red);color:white}
+.btn-red:hover{background:#8a2828}
+footer{text-align:center;padding:2.5rem;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);background:white}
+@media(max-width:560px){.grid,.grid-2{grid-template-columns:1fr 1fr;gap:.85rem}.card-price{font-size:1.3rem}.section{padding:2rem 1rem}}
+@media(max-width:360px){.grid,.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Casa de Ween</h1>
+  <p>Shopping guide · Counterbalance Apartments · Seattle</p>
+</header>
+
+<nav>
+  <a href="#tv">TV Stands</a>
+  <a href="#armoires">Armoires</a>
+  <a href="#desks">Desks</a>
+</nav>
+
+<!-- TV STANDS -->
+<div id="tv">
+<div class="section">
+  <div class="section-head"><h2>TV Stands with Fireplace</h2><span>East wall · matte black</span></div>
+  <div class="grid">
+
+    <div class="card pick">
+      <div class="img-wrap"><img src="ahb.jpg" alt="AHB 70"></div>
+      <div class="badge-row"><span class="badge b-pick">our pick</span></div>
+      <div class="card-body">
+        <p class="card-name">AHB 70" LED Fireplace</p>
+        <p class="card-sub">Matte black</p>
+        <p class="card-price">~$200</p>
+        <ul class="specs"><li>5,100 BTU fireplace</li><li>12 flame color modes</li><li>Enclosed cabinets</li><li>App control + remote</li></ul>
+      </div>
+      <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0C7V9974F" target="_blank">View on Amazon →</a></div>
+    </div>
+
+    <div class="card">
+      <div class="img-wrap"><img src="ahb.jpg" alt="AHB"></div>
+      <div class="badge-row"></div>
+      <div class="card-body">
+        <p class="card-name">AHB 70" LED Fireplace</p>
+        <p class="card-sub">Matte black</p>
+        <p class="card-price">~$200</p>
+        <ul class="specs"><li>5,100 BTU fireplace</li><li>12 flame color modes</li><li>App control via phone</li><li>Remote included</li></ul>
+      </div>
+      <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0C7V9974F" target="_blank">View on Amazon →</a></div>
+    </div>
+
+    <div class="card">
+      <div class="img-wrap"><img src="erommy.jpg" alt="EROMMY"></div>
+      <div class="badge-row"></div>
+      <div class="card-body">
+        <p class="card-name">EROMMY 70"</p>
+        <p class="card-sub">Matte black</p>
+        <p class="card-price">~$180</p>
+        <ul class="specs"><li>5,120 BTU fireplace</li><li>12 flame + 16 LED modes</li><li>Open shelves design</li><li>Remote included</li></ul>
+      </div>
+      <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0CCJFG9QD" target="_blank">View on Amazon →</a></div>
+    </div>
+
+    <div class="card alexa">
+      <div class="img-wrap"><img src="channing.jpg" alt="Modern Ember Channing"></div>
+      <div class="badge-row"><span class="badge b-alexa">Native Alexa + WiFi</span></div>
+      <div class="card-body">
+        <p class="card-name">Modern Ember Channing 80"</p>
+        <p class="card-sub">Matte black</p>
+        <p class="card-price">~$1,520</p>
+        <p class="alexa-note">✓ "Alexa, turn on the fireplace" actually works on this one</p>
+        <ul class="specs"><li>26" smart firebox insert</li><li>10 flame colors, 4 speeds</li><li>Smoked glass side cabinets</li><li>Fits TVs up to 90"</li></ul>
+      </div>
+      <div class="card-foot"><a class="btn btn-red" href="https://www.amazon.com/dp/B0DG41KJ7Q" target="_blank">View on Amazon →</a></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ARMOIRES -->
+<div id="armoires" class="alt">
+<div class="section">
+  <div class="section-head"><h2>Armoires</h2><span>East wall · north end</span></div>
+
+  <div class="subsection">
+    <p class="subsection-label">SICOTAS 71" Rattan — boho, our pick · ~$170–180</p>
+    <div class="grid-2">
+      <div class="card pick">
+        <div class="img-wrap"><img src="sicotas_light.jpg" alt="SICOTAS Light Oak"></div>
+        <div class="badge-row"><span class="badge b-pick">our pick</span></div>
+        <div class="card-body">
+          <p class="card-name">SICOTAS Rattan — Light Oak</p>
+          <p class="card-sub">Honey/light oak · gold handles</p>
+          <p class="card-price">~$180</p>
+          <ul class="specs"><li>40"W · fits east wall</li><li>Rattan doors, gold handles</li><li>Hanging rod + 2 drawers</li><li>Matches kitchen cabinets</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0FF51WN56" target="_blank">View on Amazon →</a></div>
+      </div>
+      <div class="card">
+        <div class="img-wrap"><img src="sicotas_black.jpg" alt="SICOTAS Black"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">SICOTAS Rattan — Black</p>
+          <p class="card-sub">Black + rattan panels · brass handles</p>
+          <p class="card-price">~$170</p>
+          <ul class="specs"><li>40"W · fits east wall</li><li>Rattan doors, brass handles</li><li>Hanging rod + 2 drawers</li><li>Matte black frame</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0DWXBL7FC" target="_blank">View on Amazon →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <p class="subsection-label">LEVNARY Arched Fluted — mid-century · ~$170</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="img-wrap"><img src="levnary_black.jpg" alt="LEVNARY Black"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">LEVNARY Arched — Black</p>
+          <p class="card-sub">Matte black · gold knobs</p>
+          <p class="card-price">~$170</p>
+          <ul class="specs"><li>Arched top, fluted doors</li><li>Hanging rod + 2 drawers</li><li>Mid-century modern silhouette</li><li>No rattan — totally different look</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/s?k=LEVNARY+Arched+Armoire+Wardrobe+Closet+black" target="_blank">View on Amazon →</a></div>
+      </div>
+      <div class="card">
+        <div class="img-wrap"><img src="levnary_brown.jpg" alt="LEVNARY Dark Brown"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">LEVNARY Arched — Dark Brown</p>
+          <p class="card-sub">Rich walnut · gold knobs</p>
+          <p class="card-price">~$170</p>
+          <ul class="specs"><li>Arched top, fluted doors</li><li>Hanging rod + 2 drawers</li><li>Mid-century modern silhouette</li><li>Warmest wood tone option</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/s?k=LEVNARY+Arched+Armoire+Wardrobe+Closet+walnut" target="_blank">View on Amazon →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <p class="subsection-label">VOWNER 71" Classic — most storage · ~$160</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="img-wrap"><img src="vowner_black.jpg" alt="VOWNER Black"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">VOWNER Classic — Black</p>
+          <p class="card-sub">Matte black · silver knobs</p>
+          <p class="card-price">~$160</p>
+          <ul class="specs"><li>31.5"W · clean panel doors</li><li>3 large drawers + hanging rod</li><li>Most drawer storage of the three</li><li>Simple, versatile design</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/VOWNER-Armoire-Wardrobe-Clothing-Capacity/dp/B0FRQSS292" target="_blank">View on Amazon →</a></div>
+      </div>
+      <div class="card">
+        <div class="img-wrap"><img src="vowner_brown.jpg" alt="VOWNER Brown"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">VOWNER Classic — Walnut Brown</p>
+          <p class="card-sub">Walnut brown · silver knobs</p>
+          <p class="card-price">~$160</p>
+          <ul class="specs"><li>31.5"W · clean panel doors</li><li>3 large drawers + hanging rod</li><li>Most drawer storage of the three</li><li>Warm wood tone finish</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/VOWNER-Armoire-Wardrobe-Clothing-Capacity/dp/B0FRQSS292" target="_blank">View on Amazon →</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- DESKS -->
+<div id="desks">
+<div class="section">
+  <div class="section-head"><h2>Corner Desks</h2><span>East wall · kitchen nook · desk #3</span></div>
+
+  <div class="subsection">
+    <p class="subsection-label">TIQLAB 40" L-Shaped — our pick · ~$100</p>
+    <div class="grid-2">
+      <div class="card pick">
+        <div class="img-wrap"><img src="tiqlab_brown.jpg" alt="TIQLAB Brown"></div>
+        <div class="badge-row"><span class="badge b-pick">our pick</span></div>
+        <div class="card-body">
+          <p class="card-name">TIQLAB 40" — Rustic Brown</p>
+          <p class="card-sub">Rustic brown + black frame</p>
+          <p class="card-price">~$100</p>
+          <ul class="specs"><li>2 AC + USB-A + USB-C</li><li>Reversible configuration</li><li>Storage shelves included</li><li>FSC certified wood</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0CHRN21M9" target="_blank">View on Amazon →</a></div>
+      </div>
+      <div class="card">
+        <div class="img-wrap"><img src="tiqlab_black.jpg" alt="TIQLAB Black"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">TIQLAB 40" — Black</p>
+          <p class="card-sub">All black</p>
+          <p class="card-price">~$100</p>
+          <ul class="specs"><li>2 AC + USB-A + USB-C</li><li>Reversible configuration</li><li>Storage shelves included</li><li>FSC certified wood</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/dp/B0CHRL9NQR" target="_blank">View on Amazon →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <p class="subsection-label">Lufeiya 40" L-Shaped — compact · ~$90</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="img-wrap"><img src="lufeiya.jpg" alt="Lufeiya"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">Lufeiya 40" — Rustic Brown</p>
+          <p class="card-sub">Rustic brown + black frame</p>
+          <p class="card-price">~$90</p>
+          <ul class="specs"><li>Built-in charging station</li><li>Reversible shelves</li><li>Compact 40" footprint</li><li>Good for tight nook</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/s?k=Lufeiya+40+inch+L+shaped+desk+power+outlet+rustic+brown" target="_blank">View on Amazon →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <p class="subsection-label">Rolanstar 44.5" Triangle Corner — LED + outlets · ~$120</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="img-wrap"><img src="rolanstar_brown.jpg" alt="Rolanstar Brown"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">Rolanstar 44.5" — Rustic Brown</p>
+          <p class="card-sub">Rustic brown + black frame</p>
+          <p class="card-price">~$120</p>
+          <ul class="specs"><li>Power outlets + LED lights</li><li>Keyboard tray + monitor stand</li><li>True triangle corner shape</li><li>Most features of the three</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/s?k=Rolanstar+Corner+Desk+44.5+Rustic+Brown+LED+power+outlet" target="_blank">View on Amazon →</a></div>
+      </div>
+      <div class="card">
+        <div class="img-wrap"><img src="rolanstar_black.jpg" alt="Rolanstar Black"></div>
+        <div class="badge-row"></div>
+        <div class="card-body">
+          <p class="card-name">Rolanstar 44.5" — Black</p>
+          <p class="card-sub">All black</p>
+          <p class="card-price">~$120</p>
+          <ul class="specs"><li>Power outlets + LED lights</li><li>Keyboard tray + monitor stand</li><li>True triangle corner shape</li><li>Most features of the three</li></ul>
+        </div>
+        <div class="card-foot"><a class="btn btn-dark" href="https://www.amazon.com/s?k=Rolanstar+Corner+Desk+44.5+black+LED+power+outlet" target="_blank">View on Amazon →</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>Unit 419 · Counterbalance Apartments, Seattle · All prices approximate — verify on Amazon before ordering</footer>
+
+</body>
+</html>
